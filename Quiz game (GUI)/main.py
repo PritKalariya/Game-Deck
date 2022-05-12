@@ -30,9 +30,9 @@ messagebox.showinfo("Quiz over", f"You've completed the quiz!\nYour final score 
 play_again = messagebox.askquestion("Quiz", "Would you like to play again?")
 
 if play_again == "yes":
-    if os.getcwd().split('\\')[-1] == 'Quiz game (GUI)':
+    if os.getcwd().split('\\')[-1] == 'Quiz Game (GUI)':
         os.system("python main.py")
     else:
-        os.chdir("Quiz game (GUI)")
+        os.chdir("Quiz Game (GUI)")
         os.system("python main.py")
         os.chdir("..")
