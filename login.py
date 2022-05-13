@@ -45,12 +45,14 @@ main.resizable(0, 0)
 main.configure(background="white")
 
 
+# bg image for tkinter window
 window_bg = Label(main)
 window_bg.place(relx=0, rely=0, width=450, height=700)
 img = PhotoImage(file="./images/pages/login.png")
 window_bg.configure(image=img)
 
 
+# user entry feilds
 username_entry = Entry(main)
 username_entry.place(relx=-0.100, rely=-0.034, width=370, height=24)
 username_entry.configure(
@@ -77,6 +79,7 @@ password_entry.configure(
 password_entry.place(x=100, y=300)
 
 
+# login btn
 login_bg = Label(main)
 login_img = PhotoImage(file="./images/buttons/login_btn.png")
 login_btn = Button(main)
