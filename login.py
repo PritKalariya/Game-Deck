@@ -5,9 +5,14 @@ from tkinter import *
 from tkinter import messagebox
 
 
+# window switch functions
 def login():
     main.destroy()
     os.system('python main.py')
+
+def register_page(event):
+    main.destroy()
+    os.system('python signup.py')
 
 
 def verify_login():
@@ -89,10 +94,23 @@ login_btn.configure(
     bg="white",
     fg="red",
     borderwidth="0",
+    cursor="hand2",
     font=("Arial", 20),
     command=verify_login
 )
 login_btn.place(x=145, y=480)
+
+
+# Register btn
+register = Label(main)
+register.configure(
+    text="Not registered? Register here",
+    font=("Arial", 12),
+    fg="black",
+    bg="white"
+)
+register.bind("<Button-1>", register_page)
+register.place(x=130, y=550)
 
 
 main.mainloop()
