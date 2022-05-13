@@ -98,7 +98,7 @@ login_btn.configure(
     font=("Arial", 20),
     command=verify_login
 )
-login_btn.place(x=145, y=480)
+login_btn.place(x=160, y=480)
 
 
 # Register btn
