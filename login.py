@@ -4,8 +4,6 @@ import sqlite3
 from tkinter import *
 from tkinter import messagebox
 
-from matplotlib import image
-
 
 def login():
     main.destroy()
@@ -89,7 +87,7 @@ login_btn.configure(
     fg="red",
     borderwidth="0",
     font=("Arial", 20),
-    command=login
+    command=verify_login
 )
 login_btn.place(x=145, y=480)
 
