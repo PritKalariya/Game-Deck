@@ -1,5 +1,4 @@
 from tkinter import *
-import os
 import sqlite3
 from tkinter import *
 from tkinter import messagebox
@@ -16,7 +15,8 @@ class Login_page():
 
     def gui(self):
         # design a login page
-        self.main = Tk()
+        # self.main = Tk()
+        self.main = Toplevel()
         self.main.title("Login Page")
         self.main.geometry("450x700")
         self.main.resizable(0, 0)
@@ -93,7 +93,8 @@ class Login_page():
     # Helper functions
     def login(self):
         self.main.destroy()
-        os.system('python main.py')
+        from main import Main_page
+        Main_page().gui()
 
 
     def set_active_user(self, username):
@@ -125,7 +126,7 @@ class Login_page():
                 self.password_entry.delete(0, END)
 
                 dummy = Tk()
-                dummy.withdraw()
+                dummy.destroy()
                 messagebox.showinfo("Login Successful", "Welcome to Game Deck!!")
                 self.login()
                 self.set_active_user(username)
@@ -139,7 +140,7 @@ class Login_page():
 
     def confirm_exit(self):
         self.dummy = Tk()
-        self.dummy.withdraw()
+        self.dummy.destroy()
         yes_no = messagebox.askyesno("Confirm selection", "Are you sure you want to exit?")
         if yes_no:
             self.main.destroy()

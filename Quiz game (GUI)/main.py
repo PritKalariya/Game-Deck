@@ -25,7 +25,7 @@ quiz_ui = QuizUserInterface(quiz)
 
 
 master = Tk()
-master.withdraw()
+master.destroy()
 messagebox.showinfo("Quiz over", f"You've completed the quiz!\nYour final score was: {quiz.score}/{quiz.question_number}")
 play_again = messagebox.askquestion("Quiz", "Would you like to play again?")
 

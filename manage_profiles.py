@@ -40,7 +40,7 @@ class UserProfile():
             return user_data
         except sqlite3.DatabaseError:
             dummy = Tk()
-            dummy.withdraw()
+            dummy.destroy()
             messagebox.showerror("Error", "User not found")
 
 

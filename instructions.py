@@ -1,14 +1,13 @@
 from tkinter import *
-
-from matplotlib import image
+from main import Main_page
 
 
 class Instructions_page():
-    def __init__(self):
+    def  __init__(self):
         pass
 
     def gui(self):
-        self.main = Tk()
+        self.main = Toplevel()
         self.main.title("Instructions")
         self.main.geometry("1377x768")
         self.main.resizable(0, 0)
@@ -22,8 +21,14 @@ class Instructions_page():
         self.window_bg.configure(image=self.bg)
 
 
+        self.main.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.main.mainloop()
 
 
-demo = Instructions_page()
-demo.gui()
+    def on_closing(self):
+        self.main.destroy()
+        Main_page().gui()
+
+
+# demo = Instructions_page()
+# demo.gui()

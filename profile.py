@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import messagebox
 from login import Login_page
 from main import Main_page
 
@@ -22,7 +21,7 @@ class Profile_page():
 
     def gui(self):
         # design a profile page
-        self.main = Tk()
+        self.main = Toplevel()
         self.main.title("Profile")
         self.main.geometry("900x600")
         self.main.resizable(0, 0)
@@ -183,7 +182,7 @@ class Profile_page():
 
 
         self.main.protocol("WM_DELETE_WINDOW", self.confirm_exit)
-        self.main.mainloop()
+        # self.main.mainloop()
 
 
     # Helper function
@@ -197,12 +196,8 @@ class Profile_page():
 
 
     def confirm_exit(self):
-        self.dummy = Tk()
-        self.dummy.withdraw()
-        yes_no = messagebox.askyesno("Confirm selection", "Are you sure you want to exit?")
-        if yes_no:
-            self.main.destroy()
-            Main_page().gui()
+        self.main.destroy()
+        Main_page().gui()
 
 
 # demo = Profile_page()

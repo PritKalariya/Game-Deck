@@ -12,7 +12,8 @@ class Signup_page():
         self.userprofile = UserProfile()
 
         # design a signup page
-        self.main = Tk()
+        # self.main = Tk()
+        self.main = Toplevel()
         self.main.title("Login Page")
         self.main.geometry("1200x700")
         self.main.resizable(0, 0)
@@ -135,7 +136,7 @@ class Signup_page():
             self.dob_entry.delete(0, END)
 
             self.dummy = Tk()
-            self.dummy.withdraw()
+            self.dummy.destroy()
             messagebox.showinfo("User Registered", "New user registered. Enjoy Game deck!!")
             self.signup()
         else:
@@ -144,7 +145,7 @@ class Signup_page():
 
     def confirm_exit(self):
         self.dummy = Tk()
-        self.dummy.withdraw()
+        self.dummy.destroy()
         yes_no = messagebox.askyesno("Confirm exit", "Are you sure you want to exit?")
         if yes_no:
             self.main.destroy()

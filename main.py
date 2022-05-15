@@ -3,6 +3,8 @@ from tkinter import messagebox
 import os
 
 
+
+
 class Main_page():
     def __init__(self):
         pass
@@ -10,7 +12,8 @@ class Main_page():
 
     def gui(self):
         # Main window GUI
-        self.main = Tk()
+        # self.main = Tk()
+        self.main = Toplevel()
         self.main.title("Game Deck")
         self.main.geometry("1377x768")
         self.main.resizable(0, 0)
@@ -96,13 +99,13 @@ class Main_page():
 
     def profile(self):
         self.main.withdraw()
-        os.system('python profile.py')
-        self.main.deiconify()
+        from profile import Profile_page
+        Profile_page().gui()
 
     def instructions(self):
         self.main.withdraw()
-        os.system('python instructions.py')
-        self.main.deiconify()
+        from instructions import Instructions_page
+        Instructions_page().gui()
 
     def exit(self):
         dummy = Tk()
@@ -112,7 +115,7 @@ class Main_page():
 
     def confirm_exit(self):
         self.dummy = Tk()
-        self.dummy.withdraw()
+        self.dummy.destroy()
         yes_no = messagebox.askyesno("Confirm selection", "Are you sure you want to exit?")
         if yes_no:
             self.exit()
