@@ -11,6 +11,10 @@ ACTIVE_USER = ""
 
 class Login_page():
     def __init__(self):
+        pass
+
+
+    def gui(self):
         # design a login page
         self.main = Tk()
         self.main.title("Login Page")
@@ -82,6 +86,7 @@ class Login_page():
         self.register.place(x=130, y=550)
 
 
+        self.main.protocol("WM_DELETE_WINDOW", self.confirm_exit)
         self.main.mainloop()
 
 
@@ -99,7 +104,9 @@ class Login_page():
 
     def register_page(self, event):
         self.main.destroy()
-        os.system('python signup.py')
+        # Importing signup page here to avoid circular import error.
+        from signup import Signup_page
+        Signup_page().gui()
 
 
     def verify_login(self):
@@ -130,5 +137,13 @@ class Login_page():
             messagebox.showerror("Empty Fields", "Please enter valid username and password.")
 
 
+    def confirm_exit(self):
+        self.dummy = Tk()
+        self.dummy.withdraw()
+        yes_no = messagebox.askyesno("Confirm selection", "Are you sure you want to exit?")
+        if yes_no:
+            self.main.destroy()
+
 
 # demo = Login_page()
+# demo.gui()
