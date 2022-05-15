@@ -3,7 +3,7 @@ from tkinter import messagebox
 import os
 
 
-class main_page():
+class Main_page():
     def __init__(self):
         pass
 
@@ -118,5 +118,5 @@ class main_page():
             self.main.destroy()
 
 
-# demo = main_page()
+# demo = Main_page()
 # demo.gui()
