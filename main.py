@@ -115,7 +115,7 @@ class Main_page():
         self.dummy.withdraw()
         yes_no = messagebox.askyesno("Confirm selection", "Are you sure you want to exit?")
         if yes_no:
-            self.main.destroy()
+            self.exit()
 
 
 # demo = Main_page()
