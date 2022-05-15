@@ -1,6 +1,6 @@
 from tkinter import *
+from tkinter import messagebox
 import os
-from manage_profiles import UserProfile
 
 
 # Game open functions
@@ -54,14 +54,21 @@ def hangman():
         os.chdir("..")
     main.deiconify()
 
-def logout():
+def profile():
+    main.withdraw()
+    os.system('python profile.py')
+    main.deiconify()
+
+def instructions():
+    main.withdraw()
+    os.system('python instructions.py')
+    main.deiconify()
+
+def exit():
+    dummy = Tk()
+    dummy.destroy()
+    messagebox.showinfo("Exit", "Thank you for playing Game Deck!! \nSee you soon.")
     main.destroy()
-    os.system('python login.py')
-
-
-# Database
-userprofile = UserProfile()
-# userprofile.display_db()
 
 
 # Main window GUI
@@ -72,25 +79,42 @@ main.resizable(0, 0)
 main.configure(bg="white")
 
 
-btn1 = Button(main, text="Pong Game", bg="black", fg="white", font=("Arial", 20), command=pong)
-btn1.place(x=100, y=100)
-
-btn2 = Button(main, text="Snake Game", bg="black", fg="white", font=("Arial", 20), command=snake)
-btn2.place(x=400, y=100)
-
-btn3 = Button(main, text="Quiz Game", bg="black", fg="white", font=("Arial", 20), command=quiz_game)
-btn3.place(x=800, y=100)
-
-btn4 = Button(main, text="Turtle Crossing Game", bg="black", fg="white", font=("Arial", 20), command=turtle_crossing)
-btn4.place(x=200, y=400)
-
-btn5 = Button(main, text="Hangman", bg="black", fg="white", font=("Arial", 20), command=hangman)
-btn5.place(x=200, y=500)
+# bg for tkinter window
+main_bg = Label(main)
+main_bg.place(relx=0, rely=0, width=1377, height=768)
+image = PhotoImage(file="./images/pages/main.png")
+main_bg.configure(image=image)
 
 
-# buttons
-logout = Button(main, text="Logout", bg="black", fg="white", font=("Arial", 20), command=logout)
-logout.place(x=100, y=600)
+# Game buttons
+# row 1
+snake_game_btn = Button(main, text ="PLAY",bg="#0074e4", relief="flat", width=10, height=1, cursor="hand2", command=snake)
+snake_game_btn.place(x=320, y=352.5)
+
+quiz_game_btn = Button(main, text ="PLAY", bg="#0074e4", relief="flat", width=10, height=1, cursor="hand2", command=quiz_game)
+quiz_game_btn.place(x=636, y=352.5)
+
+pong_game_btn = Button(main, text ="PLAY", bg="#0074e4", relief="flat", width=10, height=1, cursor="hand2", command=pong)
+pong_game_btn.place(x=948, y=354)
+
+# row 2
+turtle_crossing_btn = Button(main, text ="PLAY",bg="#0074e4", relief="flat", width=10, height=1, cursor="hand2", command=turtle_crossing)
+turtle_crossing_btn.place(x=320, y=678)
+
+hangman_btn = Button(main, text ="PLAY", bg="#0074e4", relief="flat", width=10, height=1, cursor="hand2", command=hangman)
+hangman_btn.place(x=638, y=680)
+
+profile_btn = Button(main, text ="USER", bg="#0074e4", relief="flat", width=10, height=1, cursor="hand2", command=profile)
+profile_btn.place(x=953, y=678)
+
+
+# instruction btn
+instruction_btn = Button(main, bg="#0074e4", relief="flat", width=3, height=2, cursor="hand2", command=instructions)
+instruction_btn.place(x=30, y=26)
+
+# exit btn
+exit_btn = Button(main, bg="#0074e4", relief="flat", width=4, height=2, cursor="hand2", command=exit)
+exit_btn.place(x=1312, y=26)
 
 
 main.mainloop()

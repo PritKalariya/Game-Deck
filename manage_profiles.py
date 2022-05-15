@@ -28,18 +28,20 @@ class UserProfile():
         conn.close()
 
 
-    def display_db(self):
+    def get_user_data(self, username):
         try:
             conn = sqlite3.connect('./database/users.db')
             c = conn.cursor()
-            c.execute("SELECT * FROM users")
-            print(c.fetchall())
+            c.execute(f"SELECT * FROM users WHERE username = '{username}'")
+            user_data = c.fetchall()
             conn.commit()
             conn.close()
+            # print(user_data)
+            return user_data
         except sqlite3.DatabaseError:
             dummy = Tk()
             dummy.withdraw()
-            messagebox.showerror("Error", "Database not found")
+            messagebox.showerror("Error", "User not found")
 
 
     def register_new_user(self, name, username, email, password, age, dob):
@@ -61,6 +63,7 @@ class UserProfile():
         conn.commit()
         conn.close()
 
+
     def delete_user(self, username):
         conn = sqlite3.connect('./database/users.db')
         c = conn.cursor()
@@ -69,3 +72,32 @@ class UserProfile():
         )
         conn.commit()
         conn.close()
+
+
+    def get_highscores(self, username):
+        conn = sqlite3.connect('./database/users.db')
+        c = conn.cursor()
+        c.execute(
+            f"SELECT pong_game, snake_game, quiz_game, hangman, turtle_crossing_game FROM users WHERE username = '{username}'"
+        )
+        scores = c.fetchall()
+        conn.commit()
+        conn.close()
+        # print(scores)
+        return scores
+
+
+    def get_col_entries(self, colname):
+        conn = sqlite3.connect('./database/users.db')
+        c = conn.cursor()
+        c.execute(f"SELECT {colname} FROM users")
+        names = c.fetchall()
+        conn.commit()
+        conn.close()
+        # print(names)
+        return names
+
+
+# demo = UserProfile()
+# data = demo.get_user_data("NoobStunts")
+# print(data[0][6])

@@ -5,6 +5,11 @@ from tkinter import *
 from tkinter import messagebox
 
 
+
+global ACTIVE_USER
+ACTIVE_USER = ""
+
+
 # window switch functions
 def login():
     main.destroy()
@@ -34,6 +39,8 @@ def verify_login():
             dummy.withdraw()
             messagebox.showinfo("Login Successful", "Welcome to Game Deck!!")
             login()
+            global ACTIVE_USER
+            ACTIVE_USER = username
         else:
             username_entry.delete(0, END)
             password_entry.delete(0, END)
