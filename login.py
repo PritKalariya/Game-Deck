@@ -5,119 +5,130 @@ from tkinter import *
 from tkinter import messagebox
 
 
-
 global ACTIVE_USER
 ACTIVE_USER = ""
 
 
-# window switch functions
-def login():
-    main.destroy()
-    os.system('python main.py')
+class Login_page():
+    def __init__(self):
+        # design a login page
+        self.main = Tk()
+        self.main.title("Login Page")
+        self.main.geometry("450x700")
+        self.main.resizable(0, 0)
+        self.main.configure(background="white")
 
-def register_page(event):
-    main.destroy()
-    os.system('python signup.py')
+
+        # bg image for tkinter window
+        self.window_bg = Label(self.main)
+        self.window_bg.place(relx=0, rely=0, width=450, height=700)
+        self.img = PhotoImage(file="./images/pages/login.png")
+        self.window_bg.configure(image=self.img)
 
 
-def verify_login():
-    if username_entry.get() != "" and password_entry.get() != "":
-        username = username_entry.get()
-        password = password_entry.get()
+        # user entry feilds
+        self.username_entry = Entry(self.main)
+        self.username_entry.place(relx=-0.100, rely=-0.034, width=370, height=24)
+        self.username_entry.configure(
+            background="white",
+            font="Arial",
+            foreground="black",
+            justify="left",
+            relief="flat",
+            bd=0
+        )
+        self.username_entry.place(x=100, y=200)
 
-        with sqlite3.connect("./database/users.db") as db:
-            cur = db.cursor()
-        find_user = cur.execute(f"SELECT * FROM users WHERE username = '{username}' AND password = {password}")
-        result = find_user.fetchall()
-        # print(result)
+        self.password_entry = Entry(self.main)
+        self.password_entry.place(relx=-0.100, rely=-0.055, width=370, height=24)
+        self.password_entry.configure(
+            background="white",
+            font="Arial",
+            foreground="black",
+            justify="left",
+            relief="flat",
+            bd=0,
+            show="*"
+        )
+        self.password_entry.place(x=100, y=300)
 
-        if result:
-            username_entry.delete(0, END)
-            password_entry.delete(0, END)
 
-            dummy = Tk()
-            dummy.withdraw()
-            messagebox.showinfo("Login Successful", "Welcome to Game Deck!!")
-            login()
-            global ACTIVE_USER
-            ACTIVE_USER = username
+        # login btn
+        self.login_bg = Label(self.main)
+        self.login_img = PhotoImage(file="./images/buttons/login_btn.png")
+        self.login_btn = Button(self.main)
+        self.login_btn.configure(
+            text="login",
+            image=self.login_img,
+            bg="white",
+            fg="red",
+            borderwidth="0",
+            cursor="hand2",
+            font=("Arial", 20),
+            command=self.verify_login
+        )
+        self.login_btn.place(x=160, y=480)
+
+
+        # Register btn
+        self.register = Label(self.main)
+        self.register.configure(
+            text="Not registered? Register here",
+            font=("Arial", 12),
+            fg="black",
+            bg="white"
+        )
+        self.register.bind("<Button-1>", self.register_page)
+        self.register.place(x=130, y=550)
+
+
+        self.main.mainloop()
+
+
+    # Helper functions
+    def login(self):
+        self.main.destroy()
+        os.system('python main.py')
+
+
+    def set_active_user(self, username):
+        global ACTIVE_USER
+        ACTIVE_USER = username
+        # print(ACTIVE_USER)
+
+
+    def register_page(self, event):
+        self.main.destroy()
+        os.system('python signup.py')
+
+
+    def verify_login(self):
+        if self.username_entry.get() != "" and self.password_entry.get() != "":
+            username = self.username_entry.get()
+            password = self.password_entry.get()
+
+            with sqlite3.connect("./database/users.db") as db:
+                cur = db.cursor()
+            find_user = cur.execute(f"SELECT * FROM users WHERE username = '{username}' AND password = {password}")
+            result = find_user.fetchall()
+            # print(result)
+
+            if result:
+                self.username_entry.delete(0, END)
+                self.password_entry.delete(0, END)
+
+                dummy = Tk()
+                dummy.withdraw()
+                messagebox.showinfo("Login Successful", "Welcome to Game Deck!!")
+                self.login()
+                self.set_active_user(username)
+            else:
+                self.username_entry.delete(0, END)
+                self.password_entry.delete(0, END)
+                messagebox.showerror("Login Failed", "Invalid username or password")
         else:
-            username_entry.delete(0, END)
-            password_entry.delete(0, END)
-            messagebox.showinfo("Login Failed", "Invalid username or password")
-    else:
-        messagebox.showinfo("Empty Fields", "Please enter valid username and password.")
+            messagebox.showerror("Empty Fields", "Please enter valid username and password.")
 
 
-# design a login page
-main = Tk()
-main.title("Login Page")
-main.geometry("450x700")
-main.resizable(0, 0)
-main.configure(background="white")
 
-
-# bg image for tkinter window
-window_bg = Label(main)
-window_bg.place(relx=0, rely=0, width=450, height=700)
-img = PhotoImage(file="./images/pages/login.png")
-window_bg.configure(image=img)
-
-
-# user entry feilds
-username_entry = Entry(main)
-username_entry.place(relx=-0.100, rely=-0.034, width=370, height=24)
-username_entry.configure(
-    background="white",
-    font="Arial",
-    foreground="black",
-    justify="left",
-    relief="flat",
-    bd=0
-)
-username_entry.place(x=100, y=200)
-
-password_entry = Entry(main)
-password_entry.place(relx=-0.100, rely=-0.055, width=370, height=24)
-password_entry.configure(
-    background="white",
-    font="Arial",
-    foreground="black",
-    justify="left",
-    relief="flat",
-    bd=0,
-    show="*"
-)
-password_entry.place(x=100, y=300)
-
-
-# login btn
-login_bg = Label(main)
-login_img = PhotoImage(file="./images/buttons/login_btn.png")
-login_btn = Button(main)
-login_btn.configure(
-    text="login",
-    image=login_img,
-    bg="white",
-    fg="red",
-    borderwidth="0",
-    cursor="hand2",
-    font=("Arial", 20),
-    command=verify_login
-)
-login_btn.place(x=160, y=480)
-
-
-# Register btn
-register = Label(main)
-register.configure(
-    text="Not registered? Register here",
-    font=("Arial", 12),
-    fg="black",
-    bg="white"
-)
-register.bind("<Button-1>", register_page)
-register.place(x=130, y=550)
-
-
-main.mainloop()
+# demo = Login_page()
