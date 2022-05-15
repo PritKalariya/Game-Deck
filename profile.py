@@ -1,7 +1,7 @@
 from tkinter import *
-import os
-# from manage_profiles import UserProfile
-# import login
+from tkinter import messagebox
+from login import Login_page
+from main import Main_page
 
 
 
@@ -15,174 +15,195 @@ import os
 # print(active_user_data)
 
 
-# helper functions
-def update_profile():
-    pass
-
-def logout():
-    main.destroy()
-    os.system("python login.py")
+class Profile_page():
+    def __init__(self):
+        pass
 
 
-# design a profile page
-main = Tk()
-main.title("Profile")
-main.geometry("900x600")
-main.resizable(0, 0)
-main.configure(background="white")
+    def gui(self):
+        # design a profile page
+        self.main = Tk()
+        self.main.title("Profile")
+        self.main.geometry("900x600")
+        self.main.resizable(0, 0)
+        self.main.configure(background="white")
 
 
-# bg image for tkinter window
-window_bg = Label(main)
-window_bg.place(relx=0, rely=0, width=900, height=600)
-img = PhotoImage(file="./images/pages/profile.png")
-window_bg.configure(image=img)
+        # bg image for tkinter window
+        self.window_bg = Label(self.main)
+        self.window_bg.place(relx=0, rely=0, width=900, height=600)
+        self.img = PhotoImage(file="./images/pages/profile.png")
+        self.window_bg.configure(image=self.img)
 
 
-# Highscores
-pong_game = Label(main)
-pong_game.place(relx=0, rely=0, width=50, height=50)
-pong_game.configure(
-    # text=active_user_data[0][6],
-    background="red",
-    font="Arial",
-    foreground="black",
-    justify="left",
-    relief="flat",
-    bd=0
-)
-pong_game.place(x=426, y=140)
+        # Highscores
+        self.pong_game = Label(self.main)
+        self.pong_game.place(relx=0, rely=0, width=50, height=50)
+        self.pong_game.configure(
+            # text=active_user_data[0][6],
+            background="red",
+            font="Arial",
+            foreground="black",
+            justify="left",
+            relief="flat",
+            bd=0
+        )
+        self.pong_game.place(x=426, y=140)
 
-snake_game = Label(main)
-snake_game.place(relx=0, rely=0, width=50, height=50)
-snake_game.configure(
-    # text=active_user_data[0][7],
-    background="red",
-    font="Arial",
-    foreground="black",
-    justify="left",
-    relief="flat",
-    bd=0
-)
-snake_game.place(x=692.7, y=140)
+        self.snake_game = Label(self.main)
+        self.snake_game.place(relx=0, rely=0, width=50, height=50)
+        self.snake_game.configure(
+            # text=active_user_data[0][7],
+            background="red",
+            font="Arial",
+            foreground="black",
+            justify="left",
+            relief="flat",
+            bd=0
+        )
+        self.snake_game.place(x=692.7, y=140)
 
-quiz_game = Label(main)
-quiz_game.place(relx=0, rely=0, width=50, height=50)
-quiz_game.configure(
-    # text=active_user_data[0][8],
-    background="red",
-    font="Arial",
-    foreground="black",
-    justify="left",
-    relief="flat",
-    bd=0
-)
-quiz_game.place(x=426, y=300)
+        self.quiz_game = Label(self.main)
+        self.quiz_game.place(relx=0, rely=0, width=50, height=50)
+        self.quiz_game.configure(
+            # text=active_user_data[0][8],
+            background="red",
+            font="Arial",
+            foreground="black",
+            justify="left",
+            relief="flat",
+            bd=0
+        )
+        self.quiz_game.place(x=426, y=300)
 
-hangman_game = Label(main)
-hangman_game.place(relx=0, rely=0, width=50, height=50)
-hangman_game.configure(
-    # text=active_user_data[0][10],
-    background="red",
-    font="Arial",
-    foreground="black",
-    justify="left",
-    relief="flat",
-    bd=0
-)
-hangman_game.place(x=692.7, y=300)
+        self.hangman_game = Label(self.main)
+        self.hangman_game.place(relx=0, rely=0, width=50, height=50)
+        self.hangman_game.configure(
+            # text=active_user_data[0][10],
+            background="red",
+            font="Arial",
+            foreground="black",
+            justify="left",
+            relief="flat",
+            bd=0
+        )
+        self.hangman_game.place(x=692.7, y=300)
 
-turtle_crossing_game = Label(main)
-turtle_crossing_game.place(relx=0, rely=0, width=50, height=50)
-turtle_crossing_game.configure(
-    # text=active_user_data[0][9],
-    background="red",
-    font="Arial",
-    foreground="black",
-    justify="left",
-    relief="flat",
-    bd=0
-)
-turtle_crossing_game.place(x=558.7, y=465)
-
-
-# profile image
-profile_icon = Label(main)
-profile_icon.place(relx=0, rely=0, width=130, height=125)
-profile_img = PhotoImage(file="./images/profiles/profile_logo.png")
-profile_icon.configure(image=profile_img)
-profile_icon.place(x=112, y=100)
+        self.turtle_crossing_game = Label(self.main)
+        self.turtle_crossing_game.place(relx=0, rely=0, width=50, height=50)
+        self.turtle_crossing_game.configure(
+            # text=active_user_data[0][9],
+            background="red",
+            font="Arial",
+            foreground="black",
+            justify="left",
+            relief="flat",
+            bd=0
+        )
+        self.turtle_crossing_game.place(x=558.7, y=465)
 
 
-# profile details
-name = Label(main)
-name.place(relx=0, rely=0, width=150, height=30)
-name.configure(
-    text="demo name",
-    background="#121212",
-    font="Arial",
-    foreground="white",
-    justify="left",
-    relief="flat",
-    bd=0
-)
-name.place(x=110, y=250)
-
-username = Label(main)
-username.place(relx=0, rely=0, width=150, height=30)
-username.configure(
-    text="demo username",
-    background="#121212",
-    font="Arial",
-    foreground="white",
-    justify="left",
-    relief="flat",
-    bd=0
-)
-username.place(x=110, y=275)
-
-bio = Label(main)
-bio.place(relx=0, rely=0, width=235, height=80)
-bio.configure(
-    text="bio",
-    background="red",
-    font="Arial",
-    foreground="white",
-    justify="left",
-    relief="flat",
-    bd=0
-)
-bio.place(x=70, y=315)
+        # profile image
+        self.profile_icon = Label(self.main)
+        self.profile_icon.place(relx=0, rely=0, width=130, height=125)
+        self.profile_img = PhotoImage(file="./images/profiles/profile_logo.png")
+        self.profile_icon.configure(image=self.profile_img)
+        self.profile_icon.place(x=112, y=100)
 
 
-# btn for profile
-update_btn = Button(main)
-update_img = PhotoImage(file="./images/buttons/update_btn.png")
-update_btn.configure(
-    text="Update",
-    image=update_img,
-    bg="#121212",
-    fg="red",
-    borderwidth="0",
-    cursor="hand2",
-    font=("Arial", 20),
-    command=update_profile
-)
-update_btn.place(x=110, y=420)
+        # profile details
+        self.name = Label(self.main)
+        self.name.place(relx=0, rely=0, width=150, height=30)
+        self.name.configure(
+            text="demo name",
+            background="#121212",
+            font="Arial",
+            foreground="white",
+            justify="left",
+            relief="flat",
+            bd=0
+        )
+        self.name.place(x=110, y=250)
 
-logout_btn = Button(main)
-logout_img = PhotoImage(file="./images/buttons/logout_btn.png")
-logout_btn.configure(
-    text="Logout",
-    image=logout_img,
-    bg="#121212",
-    fg="red",
-    borderwidth="0",
-    cursor="hand2",
-    font=("Arial", 20),
-    command=logout
-)
-logout_btn.place(x=113, y=480)
+        self.username = Label(self.main)
+        self.username.place(relx=0, rely=0, width=150, height=30)
+        self.username.configure(
+            text="demo username",
+            background="#121212",
+            font="Arial",
+            foreground="white",
+            justify="left",
+            relief="flat",
+            bd=0
+        )
+        self.username.place(x=110, y=275)
+
+        self.bio = Label(self.main)
+        self.bio.place(relx=0, rely=0, width=235, height=80)
+        self.bio.configure(
+            text="bio",
+            background="red",
+            font="Arial",
+            foreground="white",
+            justify="left",
+            relief="flat",
+            bd=0
+        )
+        self.bio.place(x=70, y=315)
 
 
-main.mainloop()
+        # btn for profile
+        self.update_btn = Button(self.main)
+        self.update_img = PhotoImage(file="./images/buttons/update_btn.png")
+        self.update_btn.configure(
+            text="Update",
+            image=self.update_img,
+            bg="#121212",
+            fg="red",
+            borderwidth="0",
+            cursor="hand2",
+            font=("Arial", 20),
+            command=self.update_profile
+        )
+        self.update_btn.place(x=110, y=420)
+
+        self.logout_btn = Button(self.main)
+        self.logout_img = PhotoImage(file="./images/buttons/logout_btn.png")
+        self.logout_btn.configure(
+            text="Logout",
+            image=self.logout_img,
+            bg="#121212",
+            fg="red",
+            borderwidth="0",
+            cursor="hand2",
+            font=("Arial", 20),
+            command=self.logout
+        )
+        self.logout_btn.place(x=113, y=480)
+
+
+        self.main.protocol("WM_DELETE_WINDOW", self.confirm_exit)
+        self.main.mainloop()
+
+
+    # Helper function
+    def update_profile(self):
+        pass
+
+
+    def logout(self):
+        self.main.destroy()
+        Login_page().gui()
+
+
+    def confirm_exit(self):
+        self.dummy = Tk()
+        self.dummy.withdraw()
+        yes_no = messagebox.askyesno("Confirm selection", "Are you sure you want to exit?")
+        if yes_no:
+            self.main.destroy()
+            Main_page().gui()
+
+
+# demo = Profile_page()
+# demo.gui()
