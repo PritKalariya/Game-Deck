@@ -128,8 +128,8 @@ class Login_page():
                 dummy = Tk()
                 dummy.destroy()
                 messagebox.showinfo("Login Successful", "Welcome to Game Deck!!")
-                self.login()
                 self.set_active_user(username)
+                self.login()
             else:
                 self.username_entry.delete(0, END)
                 self.password_entry.delete(0, END)
