@@ -1,22 +1,16 @@
 from tkinter import *
-from login import Login_page
+from login import Login_page, ACTIVE_USER
 from main import Main_page
+from manage_profiles import UserProfile
 
-
-
-# check if user is logged in
-# print(login.ACTIVE_USER)
-
-
-# use db connection to load highscores for each game (based on username)
-# userprofile = UserProfile()
-# active_user_data = userprofile.get_user_data(login.)
-# print(active_user_data)
 
 
 class Profile_page():
     def __init__(self):
-        pass
+        # use db connection to load highscores for each game (based on username)
+        self.userprofile = UserProfile()
+        self.active_user_data = self.userprofile.get_user_data(ACTIVE_USER)
+        # print(self.active_user_data)
 
 
     def gui(self):
@@ -39,10 +33,10 @@ class Profile_page():
         self.pong_game = Label(self.main)
         self.pong_game.place(relx=0, rely=0, width=50, height=50)
         self.pong_game.configure(
-            # text=active_user_data[0][6],
-            background="red",
-            font="Arial",
-            foreground="black",
+            text=self.active_user_data[0][6],
+            background="#121212",
+            font=("Arial", 20),
+            foreground="white",
             justify="left",
             relief="flat",
             bd=0
@@ -52,10 +46,10 @@ class Profile_page():
         self.snake_game = Label(self.main)
         self.snake_game.place(relx=0, rely=0, width=50, height=50)
         self.snake_game.configure(
-            # text=active_user_data[0][7],
-            background="red",
-            font="Arial",
-            foreground="black",
+            text=self.active_user_data[0][7],
+            background="#121212",
+            font=("Arial", 20),
+            foreground="white",
             justify="left",
             relief="flat",
             bd=0
@@ -65,10 +59,10 @@ class Profile_page():
         self.quiz_game = Label(self.main)
         self.quiz_game.place(relx=0, rely=0, width=50, height=50)
         self.quiz_game.configure(
-            # text=active_user_data[0][8],
-            background="red",
-            font="Arial",
-            foreground="black",
+            text=self.active_user_data[0][8],
+            background="#121212",
+            font=("Arial", 20),
+            foreground="white",
             justify="left",
             relief="flat",
             bd=0
@@ -78,10 +72,10 @@ class Profile_page():
         self.hangman_game = Label(self.main)
         self.hangman_game.place(relx=0, rely=0, width=50, height=50)
         self.hangman_game.configure(
-            # text=active_user_data[0][10],
-            background="red",
-            font="Arial",
-            foreground="black",
+            text=self.active_user_data[0][10],
+            background="#121212",
+            font=("Arial", 20),
+            foreground="white",
             justify="left",
             relief="flat",
             bd=0
@@ -91,10 +85,10 @@ class Profile_page():
         self.turtle_crossing_game = Label(self.main)
         self.turtle_crossing_game.place(relx=0, rely=0, width=50, height=50)
         self.turtle_crossing_game.configure(
-            # text=active_user_data[0][9],
-            background="red",
-            font="Arial",
-            foreground="black",
+            text=self.active_user_data[0][9],
+            background="#121212",
+            font=("Arial", 20),
+            foreground="white",
             justify="left",
             relief="flat",
             bd=0
@@ -114,7 +108,7 @@ class Profile_page():
         self.name = Label(self.main)
         self.name.place(relx=0, rely=0, width=150, height=30)
         self.name.configure(
-            text="demo name",
+            text=self.active_user_data[0][1],
             background="#121212",
             font="Arial",
             foreground="white",
@@ -127,7 +121,7 @@ class Profile_page():
         self.username = Label(self.main)
         self.username.place(relx=0, rely=0, width=150, height=30)
         self.username.configure(
-            text="demo username",
+            text=self.active_user_data[0][2],
             background="#121212",
             font="Arial",
             foreground="white",
