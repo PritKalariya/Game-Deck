@@ -3,6 +3,7 @@
 
 from tkinter import *
 from login import Login_page
+from tkVideoPlayer import TkinterVideo
 
 
 class Game_deck():
@@ -15,11 +16,12 @@ class Game_deck():
         self.main.configure(background='white')
 
 
-        # bg for tkinter window
-        self.main_bg = Label(self.main)
-        self.main_bg.place(relx=0, rely=0, width=1377, height=768)
-        self.main_img = PhotoImage(file="./images/pages/welcome_to_game_deck.png")
-        self.main_bg.configure(image=self.main_img)
+        # bg video for tkinter window
+        self.video_player = TkinterVideo(self.main, scaled=True)
+        self.video_player.load("./videos/introduction.mp4")
+        self.video_player.pack(expand=True, fill="both")
+        self.video_player.play()
+
 
 
         # Display continue btn, linking to login page after the animation is complete.
@@ -41,7 +43,7 @@ class Game_deck():
             )
             self.cont_btn.place(x=200, y=550)
         # continue_btn()
-        self.main.after(5000, lambda: continue_btn())
+        self.main.after(10000, lambda: continue_btn())
 
 
         self.main.mainloop()
