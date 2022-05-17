@@ -31,9 +31,10 @@ class Signup_page():
         self.name_entry = Entry(self.main)
         self.name_entry.place(relx=0, rely=0, width=370, height=24)
         self.name_entry.configure(
-            background="white",
+            background="#121212",
             font="Arial",
-            fg="black",
+            fg="white",
+            insertbackground="white",
             relief="flat"
         )
         self.name_entry.place(x=125, y=215)
@@ -41,9 +42,10 @@ class Signup_page():
         self.username_entry = Entry(self.main)
         self.username_entry.place(relx=0, rely=0, width=370, height=24)
         self.username_entry.configure(
-            background="white",
+            background="#121212",
             font="Arial",
-            fg="black",
+            fg="white",
+            insertbackground="white",
             relief="flat"
         )
         self.username_entry.place(x=125, y=340)
@@ -51,9 +53,10 @@ class Signup_page():
         self.password_entry = Entry(self.main)
         self.password_entry.place(relx=0, rely=0, width=370, height=24)
         self.password_entry.configure(
-            background="white",
+            background="#121212",
             font="Arial",
-            fg="black",
+            fg="white",
+            insertbackground="white",
             relief="flat"
         )
         self.password_entry.place(x=125, y=468)
@@ -61,9 +64,10 @@ class Signup_page():
         self.email_entry = Entry(self.main)
         self.email_entry.place(relx=0, rely=0, width=370, height=24)
         self.email_entry.configure(
-            background="white",
+            background="#121212",
             font="Arial",
-            fg="black",
+            fg="white",
+            insertbackground="white",
             relief="flat"
         )
         self.email_entry.place(x=704, y=212)
@@ -71,9 +75,10 @@ class Signup_page():
         self.age_entry = Entry(self.main)
         self.age_entry.place(relx=0, rely=0, width=370, height=24)
         self.age_entry.configure(
-            background="white",
+            background="#121212",
             font="Arial",
-            fg="black",
+            fg="white",
+            insertbackground="white",
             relief="flat"
         )
         self.age_entry.place(x=704, y=337)
@@ -81,9 +86,10 @@ class Signup_page():
         self.dob_entry = Entry(self.main)
         self.dob_entry.place(relx=0, rely=0, width=370, height=24)
         self.dob_entry.configure(
-            background="white",
+            background="#121212",
             font="Arial",
-            fg="black",
+            fg="white",
+            insertbackground="white",
             relief="flat"
         )
         self.dob_entry.place(x=704, y=465)
@@ -96,8 +102,9 @@ class Signup_page():
         self.register_btn.configure(
             text="register",
             image=self.register_img,
-            bg="white",
-            fg="white",
+            bg="#121212",
+            fg="#121212",
+            relief="flat",
             borderwidth="0",
             cursor="hand2",
             font=("Arial", 20),

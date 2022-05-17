@@ -32,29 +32,31 @@ class Login_page():
 
         # user entry feilds
         self.username_entry = Entry(self.main)
-        self.username_entry.place(relx=-0.100, rely=-0.034, width=370, height=24)
+        self.username_entry.place(relx=-0.100, rely=-0.034, width=345, height=24)
         self.username_entry.configure(
-            background="white",
+            background="#121212",
             font="Arial",
-            foreground="black",
+            foreground="white",
+            insertbackground="white",
             justify="left",
             relief="flat",
             bd=0
         )
-        self.username_entry.place(x=100, y=200)
+        self.username_entry.place(x=105, y=195)
 
         self.password_entry = Entry(self.main)
-        self.password_entry.place(relx=-0.100, rely=-0.055, width=370, height=24)
+        self.password_entry.place(relx=-0.100, rely=-0.055, width=345, height=24)
         self.password_entry.configure(
-            background="white",
+            background="#121212",
             font="Arial",
-            foreground="black",
+            foreground="white",
+            insertbackground="white",
             justify="left",
             relief="flat",
             bd=0,
             show="*"
         )
-        self.password_entry.place(x=100, y=300)
+        self.password_entry.place(x=105, y=302)
 
 
         # login btn
@@ -64,7 +66,7 @@ class Login_page():
         self.login_btn.configure(
             text="login",
             image=self.login_img,
-            bg="white",
+            bg="#121212",
             fg="red",
             borderwidth="0",
             cursor="hand2",
@@ -79,8 +81,8 @@ class Login_page():
         self.register.configure(
             text="Not registered? Register here",
             font=("Arial", 12),
-            fg="black",
-            bg="white"
+            fg="white",
+            bg="#121212"
         )
         self.register.bind("<Button-1>", self.register_page)
         self.register.place(x=130, y=550)
