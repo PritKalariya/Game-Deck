@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
+import re
+from datetime import datetime
 from manage_profiles import UserProfile
 
 
@@ -117,6 +119,41 @@ class Signup_page():
 
 
     # Helper methods
+    def validate_username(self, username):
+        self.username_list = self.userprofile.get_col_entries("username")
+        if (username,) in self.username_list:
+            return False
+        else:
+            return True
+
+
+    def validate_pasword(self, password):
+        if len(password) < 8:
+            return False
+        else:
+            return True
+
+
+    def validate_email(self, email):
+        self.regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
+        if re.fullmatch(self.regex, email):
+            return True
+        else:
+            return False
+
+
+    def validate_date(self, date):
+        date = date
+        format = "%d/%m/%Y"
+        try:
+            if datetime.strptime(date, format):
+                return True
+            else:
+                return False
+        except ValueError:
+            return False
+
+
     def signup(self):
         self.main.destroy()
         from login import Login_page
@@ -124,35 +161,62 @@ class Signup_page():
 
 
     def register_user(self):
-        if self.name_entry.get() != "" and self.username_entry != "" and self.password_entry.get() != "" and self.email_entry != "" and self.age_entry != "" and self.dob_entry != "":
-            username = self.username_entry.get()
-            name = self.name_entry.get()
-            password = self.password_entry.get()
-            email = self.email_entry.get()
-            age = self.age_entry.get()
-            dob = self.dob_entry.get()
+        name = self.name_entry.get().strip()
+        username = self.username_entry.get().strip()
+        password = self.password_entry.get().strip()
+        email = self.email_entry.get().strip()
+        age = self.age_entry.get().strip()
+        dob = self.dob_entry.get().strip()
 
-            # add new user
-            self.userprofile.register_new_user(name, username, email, password, age, dob)
+        if name != "":
+            if username != "":
+                if password != "":
+                    if email != "":
+                        if age != "":
+                            if dob != "":
+                                if self.validate_username(username):
+                                    if self.validate_pasword(password):
+                                        if self.validate_email(email):
+                                            if self.validate_date(dob):
 
-            self.name_entry.delete(0, END)
-            self.username_entry.delete(0, END)
-            self.password_entry.delete(0, END)
-            self.email_entry.delete(0, END)
-            self.age_entry.delete(0, END)
-            self.dob_entry.delete(0, END)
+                                                # add user to the database
+                                                self.userprofile.register_new_user(name, username, password, email, age, dob)
 
-            self.dummy = Tk()
-            self.dummy.destroy()
-            messagebox.showinfo("User Registered", "New user registered. Enjoy Game deck!!")
-            self.signup()
+                                                self.clear()
+                                                messagebox.showinfo("Success", "User registered successfully!! \nEnjoy Game Deck!!")
+                                                self.signup()
+                                            else:
+                                                messagebox.showerror("Error", "Invalid date of birth.\nPlease enter a valid date of the format -'dd/mm/yyyy'.")
+                                        else:
+                                            messagebox.showerror("Error", "Invalid email. Please enter a valid email.")
+                                    else:
+                                        messagebox.showerror("Error", "Password must be atleast 8 characters long.")
+                                else:
+                                    messagebox.showerror("Error", "Username already exists.")
+                            else:
+                                messagebox.showerror("Error", "Please enter your date of birth.")
+                        else:
+                            messagebox.showerror("Error", "Please enter your age.")
+                    else:
+                        messagebox.showerror("Error", "Please enter your email.")
+                else:
+                    messagebox.showerror("Error", "Please enter your password.")
+            else:
+                messagebox.showerror("Error", "Username cannot be empty")
         else:
-            messagebox.showerror("Empty Fields", "Please make sure all the feilds are filled.")
+            messagebox.showerror("Error", "Please enter your name")
+
+
+    def clear(self):
+        self.name_entry.delete(0, END)
+        self.username_entry.delete(0, END)
+        self.password_entry.delete(0, END)
+        self.email_entry.delete(0, END)
+        self.age_entry.delete(0, END)
+        self.dob_entry.delete(0, END)
 
 
     def confirm_exit(self):
-        self.dummy = Tk()
-        self.dummy.destroy()
         yes_no = messagebox.askyesno("Confirm exit", "Are you sure you want to exit?")
         if yes_no:
             self.main.destroy()
