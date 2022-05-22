@@ -45,7 +45,7 @@ class UserProfile():
         conn = sqlite3.connect('./database/users.db')
         c = conn.cursor()
         c.execute(
-            "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [name, username, email, password, age, dob, 0, 0, 0, 0, 0]
+            "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [name, username, password, email, age, dob, 0, 0, 0, 0, 0]
         )
         conn.commit()
         conn.close()
