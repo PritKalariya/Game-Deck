@@ -33,9 +33,6 @@ class Scoreboard(Turtle):
 
 
     def reset(self):
-        if self.score > self.high_score:
-            self.high_score = self.score
-            user_profile.update_score("snake_game", self.high_score, self.ACTIVE_USER)
         self.score = 0
         self.update_scoreboard()
 
@@ -50,4 +47,5 @@ class Scoreboard(Turtle):
         self.score += 1
         if self.score > self.high_score:
             self.high_score = self.score
+            user_profile.update_score("snake_game", self.high_score, self.ACTIVE_USER)
         self.update_scoreboard()
