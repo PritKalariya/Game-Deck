@@ -1,4 +1,12 @@
 from turtle import Turtle
+import sys
+import git
+
+
+# Append the root direcctory of git repository.
+sys.path.append(git.Repo('.', search_parent_directories=True).working_tree_dir)
+from manage_profiles import UserProfile
+
 
 FONT = ("Courier", 20, "normal")
 
@@ -7,9 +15,12 @@ class Scoreboard(Turtle):
 
     def __init__(self):
         super().__init__()
+        self.userprofile = UserProfile()
         self.level = 1
-        with open("data.txt", mode="r") as data:
-            self.highestlevel = int(data.read())
+        with open("../active_user.txt", "r") as f:
+            self.ACTIVE_USER = f.read()
+        print(self.ACTIVE_USER)
+        self.highestlevel = self.userprofile.get_score("turtle_crossing_game", self.ACTIVE_USER)
         self.hideturtle()
         self.penup()
         self.goto(-280, 250)
@@ -25,8 +36,7 @@ class Scoreboard(Turtle):
         self.level += 1
         if self.level > self.highestlevel:
             self.highestlevel = self.level
-            with open("data.txt", mode="w") as data:
-                data.write(f"{self.highestlevel}")
+            self.userprofile.update_score("turtle_crossing_game", self.level, self.ACTIVE_USER)
         self.update_scoreboard()
 
 

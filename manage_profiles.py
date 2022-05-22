@@ -34,13 +34,10 @@ class UserProfile():
             c = conn.cursor()
             c.execute(f"SELECT * FROM users WHERE username = '{username}'")
             user_data = c.fetchall()
-            conn.commit()
             conn.close()
             # print(user_data)
             return user_data
         except sqlite3.DatabaseError:
-            dummy = Tk()
-            dummy.destroy()
             messagebox.showerror("Error", "User not found")
 
 
@@ -49,16 +46,6 @@ class UserProfile():
         c = conn.cursor()
         c.execute(
             "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [name, username, email, password, age, dob, 0, 0, 0, 0, 0]
-        )
-        conn.commit()
-        conn.close()
-
-
-    def update_score(self, game_name, score, username):
-        conn = sqlite3.connect('./database/users.db')
-        c = conn.cursor()
-        c.execute(
-            f"UPDATE users SET {game_name} = {score} WHERE username = '{username}'"
         )
         conn.commit()
         conn.close()
@@ -74,30 +61,52 @@ class UserProfile():
         conn.close()
 
 
-    def get_highscores(self, username):
-        conn = sqlite3.connect('./database/users.db')
+    def update_score(self, game_name, score, username):
+        conn = sqlite3.connect('../database/users.db')
         c = conn.cursor()
         c.execute(
-            f"SELECT pong_game, snake_game, quiz_game, hangman, turtle_crossing_game FROM users WHERE username = '{username}'"
+            f"UPDATE users SET {game_name} = {score} WHERE username = '{username}'"
         )
-        scores = c.fetchall()
         conn.commit()
         conn.close()
-        # print(scores)
-        return scores
+
+
+    def get_score(self, game, username):
+        conn = sqlite3.connect('../database/users.db')
+        c = conn.cursor()
+        c.execute(f"SELECT {game} FROM users WHERE username = '{username}'")
+        score = c.fetchone()[0]
+        conn.close()
+        # print(score)
+        return score
+        # print(game)
+        # print(username)
+        # print("Activate")
+
+
+    # def get_highscores(self, username):
+    #     conn = sqlite3.connect('./database/users.db')
+    #     c = conn.cursor()
+    #     c.execute(
+    #         f"SELECT pong_game, snake_game, quiz_game, hangman, turtle_crossing_game FROM users WHERE username = '{username}'"
+    #     )
+    #     scores = c.fetchall()
+    #     conn.close()
+    #     # print(scores)
+    #     return scores
 
 
     def get_col_entries(self, colname):
         conn = sqlite3.connect('./database/users.db')
         c = conn.cursor()
         c.execute(f"SELECT {colname} FROM users")
-        names = c.fetchall()
-        conn.commit()
+        data = c.fetchall()
         conn.close()
-        # print(names)
-        return names
+        # print(data)
+        return data
 
 
 # demo = UserProfile()
-# data = demo.get_user_data("NoobStunts")
-# print(data[0][6])
+# demo.update_score("turtle_crossing_game", 2, "NoobStunts")
+# data = demo.get_score("turtle_crossing_game", "NoobStunts")
+# print(data)

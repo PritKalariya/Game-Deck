@@ -4,10 +4,6 @@ from tkinter import *
 from tkinter import messagebox
 
 
-global ACTIVE_USER
-ACTIVE_USER = ""
-
-
 class Login_page():
     def __init__(self):
         pass
@@ -100,9 +96,8 @@ class Login_page():
 
 
     def set_active_user(self, username):
-        global ACTIVE_USER
-        ACTIVE_USER = username
-        # print(ACTIVE_USER)
+        with open("active_user.txt", "w") as f:
+            f.write(username)
 
 
     def register_page(self, event):
@@ -124,13 +119,10 @@ class Login_page():
             # print(result)
 
             if result:
+                self.set_active_user(username)
                 self.username_entry.delete(0, END)
                 self.password_entry.delete(0, END)
-
-                dummy = Tk()
-                dummy.destroy()
                 messagebox.showinfo("Login Successful", "Welcome to Game Deck!!")
-                self.set_active_user(username)
                 self.login()
             else:
                 self.username_entry.delete(0, END)
@@ -141,8 +133,6 @@ class Login_page():
 
 
     def confirm_exit(self):
-        self.dummy = Tk()
-        self.dummy.destroy()
         yes_no = messagebox.askyesno("Confirm selection", "Are you sure you want to exit?")
         if yes_no:
             self.main.destroy()
