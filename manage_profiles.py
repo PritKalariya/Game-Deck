@@ -22,7 +22,7 @@ class UserProfile():
         conn = sqlite3.connect('./database/users.db')
         c = conn.cursor()
         c.execute(
-            "CREATE TABLE users (name TEXT, username TEXT PRIMARY KEY, email TEXT, password PASSWORD, age INTEGER, dob TEXT, pong_game INTEGER, snake_game INTEGER, quiz_game INTEGER, turtle_crossing_game INTEGER, hangman INTEGER)"
+            "CREATE TABLE users (name TEXT, username TEXT PRIMARY KEY, password PASSWORD, email TEXT, age INTEGER, dob TEXT, pong_game INTEGER, snake_game INTEGER, quiz_game INTEGER, turtle_crossing_game INTEGER, hangman INTEGER)"
         )
         conn.commit()
         conn.close()
@@ -41,7 +41,7 @@ class UserProfile():
             messagebox.showerror("Error", "User not found")
 
 
-    def register_new_user(self, name, username, email, password, age, dob):
+    def register_new_user(self, name, username, password, email, age, dob):
         conn = sqlite3.connect('./database/users.db')
         c = conn.cursor()
         c.execute(
