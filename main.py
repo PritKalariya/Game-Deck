@@ -50,12 +50,16 @@ class Main_page():
 
 
         # instruction btn
-        self.instruction_btn = Button(self.main, bg="#0074e4", relief="flat", width=3, height=2, cursor="hand2", command=self.instructions)
-        self.instruction_btn.place(x=30, y=26)
+        self.inst_btn = Label(self.main)
+        self.ins_bg = PhotoImage(file="./images/buttons/instructions_btn.png")
+        self.instruction_btn = Button(self.main, bg="#121212", relief="flat", image=self.ins_bg ,width=70, height=70, cursor="hand2", command=self.instructions)
+        self.instruction_btn.place(x=5, y=7)
 
         # exit btn
-        self.exit_btn = Button(self.main, bg="#0074e4", relief="flat", width=4, height=2, cursor="hand2", command=self.exit)
-        self.exit_btn.place(x=1312, y=26)
+        self.exit_btn = Label(self.main)
+        self.exit_bg = PhotoImage(file="./images/buttons/exit_btn (2).png")
+        self.exit_btn = Button(self.main, bg="#121212", relief="flat", image= self.exit_bg ,width=70, height=70, cursor="hand2", command=self.exit)
+        self.exit_btn.place(x=1294, y=7)
 
         self.main.protocol("WM_DELETE_WINDOW", self.confirm_exit)
         self.main.mainloop()
