@@ -48,4 +48,6 @@ class Scoreboard(Turtle):
 
     def increase_score(self):
         self.score += 1
+        if self.score > self.high_score:
+            self.high_score = self.score
         self.update_scoreboard()
