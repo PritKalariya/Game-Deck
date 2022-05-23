@@ -17,6 +17,24 @@ highscore = userprofile.get_score("hangman", active_user)
 score = 0
 run = True
 
+
+
+words_list = [
+    ['Google', 'when you are stuck with an error in programming, were do you go?'],
+    ['function', 'which is used to call the set of operations into action, wherever it is required. Returns a value.'],
+    ['variable', 'a container for a value, which can be used to store a value in a program.'],
+    ['list', 'a collection of items in a particular order.'],
+    ['dictionary', 'a collection of key-value pairs.'],
+    ['tuple', 'a collection of immutable Python objects.'],
+    ['set', 'a collection of unique elements.'],
+    ['loop', 'a statement that is executed repeatedly until a certain condition is met.'],
+    ['source' , ' __ code a program written in a high-level language before being compiled to machine code.'],
+    ['compile' , '__ convert source code into machine code.'],
+    ['run' , '__ execute a program.'],
+    ['youtube', '__ a world of videos.'],
+]
+
+
 # main loop
 while run:
     root = Tk()
@@ -28,11 +46,10 @@ while run:
     win_count = 0
 
     # choosing word
-    index = random.randint(0,853)
-    file = open('words.txt','r')
-    l = file.readlines()
-    selected_word = l[index].strip('\n')
-    # print(selected_word)
+    index = random.randint(0,11)
+    selected_word = words_list[index][0]
+    print(selected_word)
+
 
     # creation of word dashes variables
     x = 250
@@ -81,9 +98,12 @@ while run:
     s1 = Label(root,text = s2,bg = "#E7FFFF",font = ("arial",25))
     s1.place(x = 10,y = 10)
 
+    # display hint
+    messagebox.showinfo("Hint", words_list[index][1])
+
     # button press check function
     def check(letter,button):
-        global count,win_count,run,score
+        global count,win_count,run,score, highscore
         exec('{}.destroy()'.format(button))
         if letter in selected_word:
             for i in range(0,len(selected_word)):
