@@ -48,7 +48,7 @@ while run:
     # choosing word
     index = random.randint(0,11)
     selected_word = words_list[index][0]
-    print(selected_word)
+    # print(selected_word)
 
 
     # creation of word dashes variables
