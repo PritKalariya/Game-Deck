@@ -1,5 +1,6 @@
 from tkinter import *
-from login import Login_page, ACTIVE_USER
+from tkinter import messagebox
+from login import Login_page
 from main import Main_page
 from manage_profiles import UserProfile
 
@@ -8,9 +9,13 @@ from manage_profiles import UserProfile
 class Profile_page():
     def __init__(self):
         # use db connection to load highscores for each game (based on username)
+        with open("./active_user.txt", "r") as f:
+            self.ACTIVE_USER = f.read()
+        # print(self.ACTIVE_USER)
         self.userprofile = UserProfile()
-        self.active_user_data = self.userprofile.get_user_data(ACTIVE_USER)
+        self.active_user_data = self.userprofile.get_user_data(self.ACTIVE_USER)
         # print(self.active_user_data)
+
 
 
     def gui(self):
@@ -106,8 +111,21 @@ class Profile_page():
 
         # profile details
         self.name = Label(self.main)
-        self.name.place(relx=0, rely=0, width=150, height=30)
+        self.name.place(relx=0, rely=0, width=235, height=30)
         self.name.configure(
+            text=self.active_user_data[0][0],
+            background="#121212",
+            font="Arial",
+            foreground="white",
+            justify="left",
+            relief="flat",
+            bd=0
+        )
+        self.name.place(x=70, y=250)
+
+        self.username = Label(self.main)
+        self.username.place(relx=0, rely=0, width=235, height=30)
+        self.username.configure(
             text=self.active_user_data[0][1],
             background="#121212",
             font="Arial",
@@ -116,12 +134,12 @@ class Profile_page():
             relief="flat",
             bd=0
         )
-        self.name.place(x=110, y=250)
+        self.username.place(x=70, y=290)
 
-        self.username = Label(self.main)
-        self.username.place(relx=0, rely=0, width=150, height=30)
-        self.username.configure(
-            text=self.active_user_data[0][2],
+        self.email = Label(self.main)
+        self.email.place(relx=0, rely=0, width=235, height=30)
+        self.email.configure(
+            text=self.active_user_data[0][3],
             background="#121212",
             font="Arial",
             foreground="white",
@@ -129,36 +147,36 @@ class Profile_page():
             relief="flat",
             bd=0
         )
-        self.username.place(x=110, y=275)
+        self.email.place(x=70, y=330)
 
-        self.bio = Label(self.main)
-        self.bio.place(relx=0, rely=0, width=235, height=80)
-        self.bio.configure(
-            text="bio",
-            background="red",
+        self.dob = Label(self.main)
+        self.dob.place(relx=0, rely=0, width=235, height=30)
+        self.dob.configure(
+            text=self.active_user_data[0][5],
+            background="#121212",
             font="Arial",
             foreground="white",
             justify="left",
             relief="flat",
             bd=0
         )
-        self.bio.place(x=70, y=315)
+        self.dob.place(x=70, y=370)
 
 
         # btn for profile
-        self.update_btn = Button(self.main)
-        self.update_img = PhotoImage(file="./images/buttons/update_btn.png")
-        self.update_btn.configure(
+        self.delete_btn = Button(self.main)
+        self.delete_img = PhotoImage(file="./images/buttons/delete_btn.png")
+        self.delete_btn.configure(
             text="Update",
-            image=self.update_img,
+            image=self.delete_img,
             bg="#121212",
             fg="red",
             borderwidth="0",
             cursor="hand2",
             font=("Arial", 20),
-            command=self.update_profile
+            command=self.delete_profile
         )
-        self.update_btn.place(x=110, y=420)
+        self.delete_btn.place(x=119, y=420)
 
         self.logout_btn = Button(self.main)
         self.logout_img = PhotoImage(file="./images/buttons/logout_btn.png")
@@ -180,13 +198,19 @@ class Profile_page():
 
 
     # Helper function
-    def update_profile(self):
-        pass
+    def delete_profile(self):
+        if messagebox.askyesno("Confirmation", "Are you sure you want to delete your profile? \nAll your data will be lost forever."):
+            self.userprofile.delete_user(self.ACTIVE_USER)
+            # print(self.ACTIVE_USER)
+            self.main.destroy()
+            messagebox.showinfo("Thank you", "Thank you for playing Game Deck.")
+            Login_page().gui()
 
 
     def logout(self):
-        self.main.destroy()
-        Login_page().gui()
+        if messagebox.askyesno("Logout", "Are you sure you want to logout?"):
+            self.main.destroy()
+            Login_page().gui()
 
 
     def confirm_exit(self):
