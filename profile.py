@@ -38,7 +38,7 @@ class Profile_page():
         self.pong_game = Label(self.main)
         self.pong_game.place(relx=0, rely=0, width=50, height=50)
         self.pong_game.configure(
-            text=self.active_user_data[0][6],
+            text="/",
             background="#121212",
             font=("Arial", 20),
             foreground="white",
