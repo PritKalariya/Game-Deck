@@ -1,7 +1,19 @@
+import sys
+import git
 import random
 from tkinter import *
 from tkinter import messagebox
 
+
+# Append the root direcctory of git repository.
+sys.path.append(git.Repo('.', search_parent_directories=True).working_tree_dir)
+from manage_profiles import UserProfile
+
+
+userprofile = UserProfile()
+with open("../active_user.txt", "r") as f:
+    active_user = f.read()
+highscore = userprofile.get_score("hangman", active_user)
 score = 0
 run = True
 
@@ -9,6 +21,7 @@ run = True
 while run:
     root = Tk()
     root.geometry('905x700')
+    root.resizable(0, 0)
     root.title('Hang Man')
     root.config(bg = '#E7FFFF')
     count = 0
@@ -19,6 +32,7 @@ while run:
     file = open('words.txt','r')
     l = file.readlines()
     selected_word = l[index].strip('\n')
+    # print(selected_word)
 
     # creation of word dashes variables
     x = 250
@@ -63,7 +77,7 @@ while run:
     e1 = PhotoImage(file = 'exit.png')
     ex = Button(root,bd = 0,command = close,bg="#E7FFFF",activebackground = "#E7FFFF",font = 10,image = e1)
     ex.place(x=770,y=10)
-    s2 = 'SCORE:'+str(score)
+    s2 = 'Streak: '+str(score)
     s1 = Label(root,text = s2,bg = "#E7FFFF",font = ("arial",25))
     s1.place(x = 10,y = 10)
 
@@ -78,6 +92,9 @@ while run:
                     exec('d{}.config(text="{}")'.format(i,letter.upper()))
             if win_count == len(selected_word):
                 score += 1
+                if score > highscore:
+                    highscore = score
+                    userprofile.update_score("hangman", highscore, active_user)
                 answer = messagebox.askyesno('GAME OVER','YOU WON!\nWANT TO PLAY AGAIN?')
                 if answer == True:
                     run = True
