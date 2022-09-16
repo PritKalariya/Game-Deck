@@ -29,7 +29,8 @@ The games included are some of my favourites and the ones which i have played gr
 ✨ Let's take a glimpse of the project ✨
 
 #### Game Deck!!
-![Game Introduction animation](videos\introduction.mp4)
+
+https://user-images.githubusercontent.com/71484962/190631302-43cc3867-6ad9-495e-909c-4aa8c460c10d.mp4
 
 #### Login Page
 <p align="center">
@@ -117,4 +118,5 @@ To run this project.
 2. [Yashraj Metkar](https://github.com/metkar25)
 
 
-### We hope you liked this project. Feel free to reach out to us via email on <kalariyaprit2000@gmail.com> to share your feedbacks and suggestions 💙
+We hope you liked this project 😊<br>
+Feel free to reach out to us via email on <kalariyaprit2000@gmail.com> to share your feedbacks & suggestions 💙
